@@ -1,0 +1,14 @@
+Explain this rule violation:
+
+Rule ID: %s
+Metric: %s
+Current Value: %s
+Limit: %s
+Condition: %s
+Trend: %s
+
+Explain in simple English:
+1. What happened?
+2. Why it matters?
+3. Risk level?
+4. Recommend next steps.

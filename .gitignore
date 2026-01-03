@@ -1,2 +1,4 @@
 .venv
 .env
+trash.py
+*.pyc

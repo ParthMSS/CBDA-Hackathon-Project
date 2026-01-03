@@ -4,3 +4,5 @@ pyyaml
 requests
 schedule
 matplotlib
+dotenv
+openrouter
