@@ -1,0 +1,129 @@
+{
+  "investments": [
+    {
+        "id": 1,
+        "name": "TechCorp Industries",
+        "type": "Senior Secured Loan",
+        "amount_invested": 50000000,
+        "date_invested": "2020-01-15",
+        "current_value": 52500000,
+        "investment_details": {
+            "industry": "Technology",
+            "loan_type": "Term Loan",
+            "interest_rate": 0.065,
+            "maturity_date": "2027-01-15",
+            "loan_term_years": 7,
+            "collateral": "Equipment, Intellectual Property, Accounts Receivable",
+            "credit_rating": "BBB+",
+            "risk_profile": "Low",
+            "covenant_status": "Compliant"
+        },
+        "data_source":{
+            "type":"csv",
+            "path":"TechCorp_Industries_Covenant_Data.csv",
+            "table":"",
+            "url":""
+        }
+    },
+    {
+      "id": 2,
+      "name": "RetailMart LLC",
+      "type": "Mezzanine Debt",
+      "amount_invested": 35000000,
+      "date_invested": "2020-03-20",
+      "current_value": 38200000,
+      "investment_details": {
+        "industry": "Retail",
+        "loan_type": "Subordinated Debt",
+        "interest_rate": 0.095,
+        "maturity_date": "2027-03-20",
+        "loan_term_years": 7,
+        "collateral": "Real Estate, Inventory",
+        "credit_rating": "BB",
+        "risk_profile": "Medium",
+        "covenant_status": "Near Breach - Monitor Closely"
+      },
+        "data_source":{
+            "type":"csv",
+            "path":"RetailMart_LLC_Covenant_Data.csv",
+            "table":"",
+            "url":""
+        }
+    },
+    {
+      "id": 3,
+      "name": "Manufacturing Global",
+      "type": "Revolving Credit Facility",
+      "amount_invested": 45000000,
+      "date_invested": "2020-06-10",
+      "current_value": 44100000,
+      "investment_details": {
+        "industry": "Manufacturing",
+        "loan_type": "Revolver",
+        "interest_rate": 0.055,
+        "maturity_date": "2025-06-10",
+        "loan_term_years": 5,
+        "collateral": "Plant & Equipment, Inventory",
+        "credit_rating": "BBB-",
+        "risk_profile": "Medium",
+        "covenant_status": "Warning - Declining Metrics"
+      },
+        "data_source":{
+            "type":"csv",
+            "path":"Manufacturing_Global_Covenant_Data.csv",
+            "table":"",
+            "url":""
+        }
+    },
+    {
+      "id": 4,
+      "name": "Energy Solutions Inc",
+      "type": "Project Finance Loan",
+      "amount_invested": 75000000,
+      "date_invested": "2020-09-01",
+      "current_value": 71250000,
+      "investment_details": {
+        "industry": "Energy",
+        "loan_type": "Project Finance",
+        "interest_rate": 0.085,
+        "maturity_date": "2030-09-01",
+        "loan_term_years": 10,
+        "collateral": "Project Assets, Revenue Streams",
+        "credit_rating": "BB-",
+        "risk_profile": "High",
+        "covenant_status": "Near Breach - Multiple Covenants"
+      },
+        "data_source":{
+            "type":"csv",
+            "path":"Energy_Solutions_Inc_Covenant_Data.csv",
+            "table":"",
+            "url":""
+        }
+    },
+    {
+      "id": 5,
+      "name": "Healthcare Systems Co",
+      "type": "Corporate Bond",
+      "amount_invested": 40000000,
+      "date_invested": "2020-11-12",
+      "current_value": 43600000,
+      "investment_details": {
+        "industry": "Healthcare",
+        "loan_type": "Senior Unsecured Bond",
+        "interest_rate": 0.045,
+        "maturity_date": "2028-11-12",
+        "loan_term_years": 8,
+        "collateral": "Unsecured - General Corporate",
+        "credit_rating": "A-",
+        "risk_profile": "Low",
+        "covenant_status": "Compliant - Improving"
+      },
+        "data_source":{
+            "type":"csv",
+            "path":"Healthcare_Systems_Co_Covenant_Data.csv",
+            "table":"",
+            "url":""
+        }
+    }
+  ]
+}

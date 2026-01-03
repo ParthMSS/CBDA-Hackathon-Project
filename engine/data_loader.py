@@ -4,7 +4,7 @@ import requests
 from pathlib import Path
 
 default_folder = "data/"
-def load_data_from_rule(rule: dict) -> pd.DataFrame:
+def load_data_from_investment(rule: dict) -> pd.DataFrame:
     """
     Loads data depending on rule['data_source']['type'].
     
@@ -93,40 +93,3 @@ def _load_api(ds, rule):
     df = pd.DataFrame(data)
 
     return df[cols] if cols else df
-
-
-if __name__ == "__main__":
-    sample_rule = {
-        "data_source": {
-            "type": "excel",
-            "path": "metrics.xlsx"
-        },
-        "columns": ["debt_ratio", "liquidity_ratio", "daily_revenue"]
-    }
-
-    df = load_data_from_rule(sample_rule)
-    print(df.head())
-
-    sample_rule = {
-        "data_source": {
-            "type": "csv",
-            "path": "metrics.csv"
-        },
-        "columns": ["debt_ratio", "liquidity_ratio", "daily_revenue"]
-    }
-
-    df = load_data_from_rule(sample_rule)
-    print(df.head())
-
-
-    sample_rule = {
-        "data_source": {
-            "type": "sqlite",
-            "path": "finance.db",
-            "table": "metrics",
-        },
-        "columns": ["date", "debt", "equity"]
-    }
-
-    df = load_data_from_rule(sample_rule)
-    print(df.head())

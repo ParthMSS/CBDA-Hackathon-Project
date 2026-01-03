@@ -1,10 +1,15 @@
 import yaml
 import pandas as pd
 import numpy as np
+import json
+
 def load_rules():
     with open("config/rules.yaml", "r") as f:
         return yaml.safe_load(f)["rules"]
 
+def load_investments():
+    with open("config/investments.json", "r") as f:
+        return json.load(f)["investments"]
 
 
 def evaluate_rule(rule, df: pd.DataFrame):

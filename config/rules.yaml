@@ -1,70 +1,375 @@
 rules:
+  
+  # LEVERAGE RATIOS
+  - name: "Debt-to-EBITDA Ratio"
+    metric: "Debt-to-EBITDA"
+    ideal_value: 2.5
+    threshold_value: 4.5
+    near_breach_value: 4.2
+    covenant_type: "maximum"
+    severity: "high"
+    description: |
+      Measures the company's ability to pay off its debt with earnings before interest, taxes, depreciation,
+      and amortization.
 
-  - id: liquidity_ratio_check
-    data_source:
-      type: "sqlite"
-      path: "finance.db"
-      table: "metrics"
-      url: ""
-    metric: debt
-    severity: medium
-    condition: 
-      operator: "<"
-      threshold: 1400000
-      near_breach_threshold_delta: 100000
-    description: "Liquidity ratio must be at least 1.5 to avoid breach."
-  - id: dscr_minimum_check
-    data_source:
-      type: "csv"
-      path: "dscr_corporatelending.csv"
-      table: ""
-      url: ""
-    metric: dscr
-    severity: high
-    condition:
-      operator: ">="
-      threshold: 1.20
-    near_breach_threshold: 1.25
-    description: "Debt Service Coverage Ratio (DSCR) must stay at or above 1.20 to avoid covenant breach."
+      Higher ratios indicate greater financial leverage and **increased risk**.
 
-  - id: dscr_delta_stability_check
-    data_source:
-      type: "csv"
-      path: "dscr_corporatelending.csv"
-      table: ""
-      url: ""
-    metric: delta
-    severity: medium
-    condition:
-      operator: ">="
-      threshold: 0.00
-    near_breach_threshold: 0.03
-    description: "Delta indicates deviation from DSCR threshold. Any negative delta signals a breach."
+      **POTENTIAL THREATS:**
+        - Inability to service debt obligations  
+        - Reduced borrowing capacity  
+        - Increased cost of capital  
+        - Covenant default triggering cross-defaults  
+        - Forced asset sales or restructuring  
 
-  - id: cfads_debtservice_coverage_check
-    data_source:
-      type: "csv"
-      path: "dscr_corporatelending.csv"
-      table: ""
-      url: ""
-    metric: "cfads"
-    severity: high
-    condition:
-      operator: ">="
-      threshold: 130
-    near_breach_threshold: 5
-    description: "CFADS to Debt Service ratio must remain above 1.20 to maintain compliance."
-  #   sample rule:
-  # - id: liquidity_ratio_check
-  #   data_source:
-  #     type: "sqlite" # can be csv | excel | sqlite | api
-  #     path: "finance.db" # or file path for csv/excel 
-  #     table: "metrics" # for sqlite only 
-  #     url: "" # only for API 
-  #   metric: debt
-  #   severity: medium
-  #   condition: 
-  #     operator: ">=" # can be >= | <= | > | < 
-  #     threshold: 1.5 # exact numeric value to compare against
-  #   near_breach_threshold: 1.8 # exact numeric value to compare against 
-  #   description: "Liquidity ratio must be at least 1.5 to avoid breach."
+      **VALUE RANGES:**
+        - *Excellent (0.0-2.0)* : very low leverage with strong debt repayment capacity  
+        - *Good (2.0-3.0)* : healthy leverage with comfortable coverage  
+        - *Moderate (3.0-4.0)* : needs monitoring  
+        - *Warning (4.0-4.5)* : approaching threshold  
+        - *Breach (>4.5)* : covenant violation requiring immediate action  
+
+
+  - name: "Total Debt-to-Equity Ratio"
+    metric: "Debt-to-Equity"
+    ideal_value: 1.0
+    threshold_value: 2.5
+    near_breach_value: 2.3
+    covenant_type: "maximum"
+    severity: "high"
+    description: |
+      Indicates the proportion of shareholders' equity vs. debt used to finance assets.  
+      Higher ratios reflect **more aggressive financing** and **greater financial risk**.
+
+      **POTENTIAL THREATS:**
+        - Financial instability and bankruptcy risk  
+        - Difficulty raising capital  
+        - Higher interest rates on borrowing  
+        - Forced equity dilution  
+        - Reduced financial flexibility  
+
+      **VALUE RANGES:**
+        - *Excellent (0.0-0.5)* : conservative capital structure  
+        - *Good (0.5-1.5)* : balanced leverage  
+        - *Moderate (1.5-2.0)* : elevated leverage  
+        - *Warning (2.0-2.5)* : approaching covenant limit  
+        - *Breach (>2.5)* : excessive leverage violating covenant  
+
+
+  - name: "Net Debt-to-Total Capitalization"
+    metric: "Net-Debt-to-Total-Cap"
+    ideal_value: 0.35
+    threshold_value: 0.65
+    near_breach_value: 0.62
+    covenant_type: "maximum"
+    severity: "medium"
+    description: |
+      Measures the % of capitalization funded by net debt after cash adjustments.  
+      Reflects overall **leverage** and **solvency strength**.
+
+      **POTENTIAL THREATS:**
+        - Limited financial flexibility  
+        - Lower investment capacity  
+        - Vulnerability to downturns  
+        - Higher financing costs  
+        - Credit rating downgrade risk  
+
+      **VALUE RANGES:**
+        - *Excellent (0.0-0.30)* : low leverage  
+        - *Good (0.30-0.45)* : moderate leverage  
+        - *Moderate (0.45-0.55)* : close monitoring required  
+        - *Warning (0.55-0.65)* : approaching threshold  
+        - *Breach (>0.65)* : over-leveraged  
+
+
+  - name: "Senior Debt-to-EBITDA Ratio"
+    metric: "Senior-Debt-to-EBITDA"
+    ideal_value: 1.8
+    threshold_value: 3.5
+    near_breach_value: 3.3
+    covenant_type: "maximum"
+    severity: "high"
+    description: |
+      Measures senior secured debt relative to EBITDA — important for lenders with priority claims.
+
+      **POTENTIAL THREATS:**
+        - Insufficient cash flow for senior debt  
+        - Higher risk for subordinated lenders  
+        - Reduced borrowing base  
+        - Possible acceleration of senior debt  
+        - Forced asset liquidation  
+
+      **VALUE RANGES:**
+        - *Excellent (0.0-1.5)* : very strong coverage  
+        - *Good (1.5-2.5)* : adequate coverage  
+        - *Moderate (2.5-3.0)* : needs monitoring  
+        - *Warning (3.0-3.5)* : elevated leverage  
+        - *Breach (>3.5)* : covenant violation  
+
+
+  # COVERAGE RATIOS
+  - name: "Interest Coverage Ratio"
+    metric: "Interest-Coverage"
+    ideal_value: 4.5
+    threshold_value: 2.5
+    near_breach_value: 2.7
+    covenant_type: "minimum"
+    severity: "high"
+    description: |
+      Measures how many times EBITDA can cover interest obligations.  
+      Lower ratios indicate **difficulty meeting interest payments**.
+
+      **POTENTIAL THREATS:**
+        - Payment default  
+        - Reduced profitability  
+        - Emergency financing needs  
+        - Debt restructuring  
+        - Increased lender scrutiny  
+
+      **VALUE RANGES:**
+        - *Excellent (>5.0)* : very strong coverage  
+        - *Good (3.5-5.0)* : comfortable coverage  
+        - *Moderate (2.5-3.5)* : limited cushion  
+        - *Warning (2.0-2.5)* : marginal  
+        - *Breach (<2.5)* : covenant violation  
+
+
+  - name: "Debt Service Coverage Ratio (DSCR)"
+    metric: "DSCR"
+    ideal_value: 1.8
+    threshold_value: 1.2
+    near_breach_value: 1.25
+    covenant_type: "minimum"
+    severity: "high"
+    description: |
+      Measures cash flow available to service debt (principal + interest).  
+      One of the **most critical** loan covenant metrics.
+
+      **POTENTIAL THREATS:**
+        - Default on payments  
+        - Triggering cash sweeps  
+        - Restricted dividends  
+        - Required equity injections  
+        - Accelerated debt maturity  
+
+      **VALUE RANGES:**
+        - *Excellent (>2.0)* : strong coverage  
+        - *Good (1.5-2.0)* : adequate  
+        - *Moderate (1.2-1.5)* : minimal cushion  
+        - *Warning (1.1-1.2)* : tight coverage  
+        - *Breach (<1.2)* : violation  
+
+
+  - name: "Fixed Charge Coverage Ratio"
+    metric: "Fixed-Charge-Coverage"
+    ideal_value: 2.0
+    threshold_value: 1.5
+    near_breach_value: 1.55
+    covenant_type: "minimum"
+    severity: "medium"
+    description: |
+      Measures ability to cover **all** fixed charges — interest, leases, and contractual obligations.
+
+      **POTENTIAL THREATS:**
+        - Inability to meet lease obligations  
+        - Default on commitments  
+        - Operational disruptions  
+        - Legal exposure  
+        - Reduced flexibility  
+
+      **VALUE RANGES:**
+        - *Excellent (>2.5)* : strong obligation coverage  
+        - *Good (1.8-2.5)* : comfortable  
+        - *Moderate (1.5-1.8)* : adequate  
+        - *Warning (1.3-1.5)* : marginal  
+        - *Breach (<1.5)* : violation  
+
+
+  # LIQUIDITY RATIOS
+  - name: "Current Ratio"
+    metric: "Current-Ratio"
+    ideal_value: 2.0
+    threshold_value: 1.2
+    near_breach_value: 1.25
+    covenant_type: "minimum"
+    severity: "medium"
+    description: |
+      Measures ability to pay short-term obligations using current assets.  
+      Core indicator of **liquidity**.
+
+      **POTENTIAL THREATS:**
+        - Working capital shortage  
+        - Late supplier payments  
+        - Operational disruption  
+        - Emergency financing  
+        - Supply chain risks  
+
+      **VALUE RANGES:**
+        - *Excellent (>2.5)* : strong liquidity  
+        - *Good (1.8-2.5)* : healthy  
+        - *Moderate (1.2-1.8)* : adequate  
+        - *Warning (1.0-1.2)* : tight  
+        - *Breach (<1.2)* : violation  
+
+
+  - name: "Quick Ratio (Acid Test)"
+    metric: "Quick-Ratio"
+    ideal_value: 1.5
+    threshold_value: 1.0
+    near_breach_value: 1.05
+    covenant_type: "minimum"
+    severity: "medium"
+    description: |
+      Measures ability to meet obligations using **most liquid assets**, excluding inventory.
+
+      **POTENTIAL THREATS:**
+        - Immediate liquidity crisis  
+        - Over-reliance on inventory  
+        - Payment delays  
+        - Damaged credit relationships  
+        - Bankruptcy risk  
+
+      **VALUE RANGES:**
+        - *Excellent (>1.5)* : excellent liquidity  
+        - *Good (1.2-1.5)* : strong  
+        - *Moderate (1.0-1.2)* : adequate  
+        - *Warning (0.8-1.0)* : weak  
+        - *Breach (<1.0)* : severe shortage  
+
+
+  - name: "Minimum Cash Balance"
+    metric: "Cash-Balance-MM"
+    ideal_value: 15.0
+    threshold_value: 5.0
+    near_breach_value: 5.5
+    covenant_type: "minimum"
+    severity: "high"
+    description: |
+      Minimum required cash holdings (in millions) to ensure operational stability.
+
+      **POTENTIAL THREATS:**
+        - Payroll issues  
+        - Operational shutdown  
+        - Emergency borrowing  
+        - Vendor payment defaults  
+        - Loss of key relationships  
+
+      **VALUE RANGES:**
+        - *Excellent (>20M)* : very strong reserves  
+        - *Good (10M-20M)* : adequate  
+        - *Moderate (5M-10M)* : thin cushion  
+        - *Warning (3M-5M)* : dangerously low  
+        - *Breach (<5M)* : violation  
+
+
+  # PROFITABILITY METRICS
+  - name: "EBITDA (Earnings Before Interest, Taxes, Depreciation, Amortization)"
+    metric: "EBITDA-MM"
+    ideal_value: 50.0
+    threshold_value: 20.0
+    near_breach_value: 22.0
+    covenant_type: "minimum"
+    severity: "high"
+    description: |
+      Minimum required EBITDA (in millions).  
+      Measures **core operating profitability** and **cash generation**.
+
+      **POTENTIAL THREATS:**
+        - Declining performance  
+        - Competitive loss  
+        - Inability to service debt  
+        - Forced restructuring  
+        - Asset impairments  
+
+      **VALUE RANGES:**
+        - *Excellent (>60M)* : strong profitability  
+        - *Good (40M-60M)* : healthy  
+        - *Moderate (20M-40M)* : acceptable  
+        - *Warning (15M-20M)* : weak  
+        - *Breach (<20M)* : violation  
+
+
+  - name: "EBITDA Margin"
+    metric: "EBITDA-Margin"
+    ideal_value: 0.25
+    threshold_value: 0.12
+    near_breach_value: 0.13
+    covenant_type: "minimum"
+    severity: "medium"
+    description: |
+      EBITDA as a percentage of revenue — measures **operational efficiency**.
+
+      **POTENTIAL THREATS:**
+        - Pricing pressure  
+        - Cost inefficiencies  
+        - Competitive erosion  
+        - Unsustainable model  
+        - Need for restructuring  
+
+      **VALUE RANGES:**
+        - *Excellent (>30%)* : exceptional efficiency  
+        - *Good (20%-30%)* : strong  
+        - *Moderate (12%-20%)* : acceptable  
+        - *Warning (10%-12%)* : thin margins  
+        - *Breach (<12%)* : violation  
+
+
+  - name: "Return on Assets (ROA)"
+    metric: "ROA"
+    ideal_value: 0.12
+    threshold_value: 0.05
+    near_breach_value: 0.055
+    covenant_type: "minimum"
+    severity: "medium"
+    description: |
+      Net income divided by total assets — indicator of **asset efficiency**.
+
+      **POTENTIAL THREATS:**
+        - Poor asset utilization  
+        - Declining profitability  
+        - Asset deterioration  
+        - Management issues  
+        - Value destruction  
+
+      **VALUE RANGES:**
+        - *Excellent (>15%)* : highly efficient  
+        - *Good (8%-15%)* : strong  
+        - *Moderate (5%-8%)* : adequate  
+        - *Warning (3%-5%)* : weak  
+        - *Breach (<5%)* : violation  
+
+
+  - name: "Return on Equity (ROE)"
+    metric: "ROE"
+    ideal_value: 0.18
+    threshold_value: 0.08
+    near_breach_value: 0.085
+    covenant_type: "minimum"
+    severity: "medium"
+    description: |
+      Net income divided by shareholder equity — indicator of **returns generated for owners**.
+
+      **POTENTIAL THREATS:**
+        - Poor shareholder returns  
+        - Difficulty raising capital  
+        - Management performance concerns  
+        - Value destruction  
+        - Activist investor pressure  
+
+      **VALUE RANGES:**
+        - *Excellent (>20%)* : superior returns  
+        - *Good (12%-20%)* : strong  
+        - *Moderate (8%-12%)* : acceptable  
+        - *Warning (5%-8%)* : subpar  
+        - *Breach (<8%)* : violation  
+
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-01-04"
+  description: "Comprehensive covenant monitoring rules for lending authority debt oversight"
+  usage_notes:
+    - "All monetary values are in millions (MM) unless otherwise specified"
+    - "Ratios marked as 'maximum' covenants should not exceed threshold"
+    - "Ratios marked as 'minimum' covenants should not fall below threshold"
+    - "Near breach values indicate warning zone requiring immediate attention"
+    - "Severity levels: high (immediate action), medium (close monitoring), low (routine review)"
