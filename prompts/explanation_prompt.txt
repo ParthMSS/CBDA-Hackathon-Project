@@ -1,0 +1,23 @@
+Explain the following covenant monitoring alert in simple, non-technical English.
+
+Metric: {metric}
+Current Value: {current_value}
+Covenant Limit: {limit}
+Status: {status}
+
+Trend Analysis:
+- Direction: {trend}
+- Rate of Change: {rate_of_change}%
+- Confidence Level: {trend_confidence}
+
+Please explain:
+1. What is happening right now.
+2. Why this matters.
+3. How serious the risk is.
+4. What the user should watch going forward.
+
+Rules:
+- Do NOT give financial or legal advice.
+- Do NOT speculate on causes.
+- Only explain using the information provided.
+- Keep the explanation clear and concise.
