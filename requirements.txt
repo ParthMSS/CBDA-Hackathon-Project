@@ -6,3 +6,5 @@ schedule
 matplotlib
 dotenv
 openrouter
+db-sqlite3
+openpyxl
