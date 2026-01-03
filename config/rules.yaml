@@ -1,0 +1,17 @@
+rules:
+  - id: debt_ratio_min
+    metric: debt_ratio
+    condition: "value >= 1.2"
+    near_breach_threshold: 10%     # within 10% → near breach
+    severity: high
+
+  - id: liquidity_ratio_min
+    metric: liquidity_ratio
+    condition: "value >= 0.8"
+    near_breach_threshold: 5%
+    severity: medium
+
+  - id: revenue_drop
+    metric: daily_revenue
+    condition: "value >= moving_average_7d * 0.9"
+    severity: medium
