@@ -14,46 +14,59 @@ def load_investments():
 
 def evaluate_rule(rule, df: pd.DataFrame):
     """
-    Evaluates a single rule against the provided DataFrame.
-    Supports simple comparison operators: >, <, >=, <=, ==, !=
+    Evaluate a rule using the new YAML structure:
+      - ideal_value
+      - near_breach_value
+      - threshold_value
+      - covenant_type: 'minimum' or 'maximum'
     """
+
     metric = rule["metric"]
-    operator = rule["condition"]["operator"]
-    limit = rule["condition"]["threshold"]
-    near_breach_threshold_delta = rule["condition"].get("near_breach_threshold_delta", 0)
 
     if metric not in df.columns:
         raise ValueError(f"Column '{metric}' not found in DataFrame")
 
-    latest_value = df[metric].iloc[-1]
-    breached = False
-    if operator == ">":
-        breached = latest_value > limit
-    elif operator == "<":
-        breached = latest_value < limit
-    elif operator == ">=":
-        breached = latest_value >= limit
-    elif operator == "<=":
-        breached = latest_value <= limit
-    else:
-        raise ValueError(f"Unsupported operator: {operator}")
+    latest_value = float(df[metric].iloc[-1])
 
+    ideal = float(rule["ideal_value"])
+    near_breach_val = float(rule["near_breach_value"])
+    threshold = float(rule["threshold_value"])
+    covenant_type = rule["covenant_type"].lower()
+
+    breached = False
     near_breach = False
-    new_breach_value = None
-    if near_breach_threshold_delta > 0:
-        if operator == ">" or operator == ">=":
-            near_breach = latest_value >= (limit - near_breach_threshold_delta)
-            new_breach_value = limit - near_breach_threshold_delta
-        elif operator == "<" or operator == "<=":
-            near_breach = latest_value <= (limit + near_breach_threshold_delta)
-            new_breach_value = limit + near_breach_threshold_delta
+    ideal_state = False
+
+    # ------------------------------
+    #   COVENANT LOGIC HANDLING
+    # ------------------------------
+    if covenant_type == "minimum":
+        # Must stay ABOVE threshold
+        breached = latest_value < threshold
+        near_breach = latest_value < near_breach_val and not breached
+        ideal_state = latest_value >= ideal
+
+    elif covenant_type == "maximum":
+        # Must stay BELOW threshold
+        breached = latest_value > threshold
+        near_breach = latest_value > near_breach_val and not breached
+        ideal_state = latest_value <= ideal
+
+    else:
+        raise ValueError(f"Unsupported covenant_type: {covenant_type}")
 
     return {
-        "breached": breached,
-        "near_breach": near_breach,
+        "metric": metric,
         "value": latest_value,
-        "new_breach_value": new_breach_value,
-        "limit": limit,
-        "operator": operator,
+        "ideal_value": ideal,
+        "near_breach_value": near_breach_val,
+        "threshold_value": threshold,
+        "covenant_type": covenant_type,
+        "ideal_state": ideal_state,
+        "near_breach": near_breach,
+        "breached": breached,
+        "severity": rule.get("severity", "unknown"),
+        "name": rule["name"],
     }
+
 

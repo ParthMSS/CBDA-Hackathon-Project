@@ -32,10 +32,10 @@ def generate_alert(
     """
 
     # 1. Classify current status
-    if rule_result["evaluation"]:
+    if rule_result["ideal_state"]:
         status = "Safe"
         severity = "ok"
-    elif rule_result["near"]:
+    elif rule_result["near_breach"]:
         status = "Near Breach"
         severity = "warning"
     else:

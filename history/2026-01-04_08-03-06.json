@@ -1,0 +1,177 @@
+{
+    "summary": {
+        "total_investments": 5,
+        "total_breaches": 2,
+        "total_near_breaches": 0,
+        "total_ideal": 3
+    },
+    "investments": [
+        {
+            "id": 1,
+            "name": "TechCorp Industries",
+            "type": "Senior Secured Loan",
+            "breaches": 0,
+            "near_breaches": 0,
+            "ideal": 1,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Safe",
+                    "severity": "ok",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -1.66,
+                    "trend_confidence": "medium",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 1.78,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": true,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "RetailMart LLC",
+            "type": "Mezzanine Debt",
+            "breaches": 0,
+            "near_breaches": 0,
+            "ideal": 1,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Safe",
+                    "severity": "ok",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -15.79,
+                    "trend_confidence": "low",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 1.6,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": true,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Manufacturing Global",
+            "type": "Revolving Credit Facility",
+            "breaches": 1,
+            "near_breaches": 0,
+            "ideal": 0,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Breach",
+                    "severity": "critical",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "improving",
+                    "rate_of_change": 0.26,
+                    "trend_confidence": "high",
+                    "explanation": "Here's an explanation of the covenant alert:\n1.  **What is happening right now:** The company is in breach of its Senior-Debt-to-EBITDA covenant. There is no current value or covenant limit provided.\n2.  **Why this matters:** Breaching a covenant can have negative consequences for the company.\n3.  **How serious the risk is:** The severity of the risk cannot be determined from the information provided.\n4.  **What the user should watch going forward:** The Senior-Debt-to-EBITDA ratio is improving at a rate of 0.26%, with high confidence. Continue to monitor this trend.\nFor alert:  {'metric': 'Senior-Debt-to-EBITDA', 'status': 'Breach', 'severity': 'critical', 'current_value': None, 'limit': None, 'trend': 'improving', 'rate_of_change': np.float64(0.26), 'trend_confidence': 'high', 'explanation': \"Here's an explanation of the covenant alert:\n\n1.  **What is happening right now:** The company is in breach of its Senior-Debt-to-EBITDA covenant. There is no current value or covenant limit provided.\n2.  **Why this matters:** Breaching a covenant can have negative consequences for the company.\n3.  **How serious the risk is:** The severity of the risk cannot be determined from the information provided.\n4.  **What the user should watch going forward:** The Senior-Debt-to-EBITDA ratio is improving at a rate of 0.26%, with high confidence. Continue to monitor this trend.\"}",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 3.85,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": false,
+                        "near_breach": false,
+                        "breached": true,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Energy Solutions Inc",
+            "type": "Project Finance Loan",
+            "breaches": 1,
+            "near_breaches": 0,
+            "ideal": 0,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Breach",
+                    "severity": "critical",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -15.75,
+                    "trend_confidence": "low",
+                    "explanation": "Here's an explanation of the covenant alert, based solely on the data provided:\n1.  **What is happening right now:** The Senior-Debt-to-EBITDA metric is in breach. No specific current value or covenant limit was provided\n2.  **Why this matters:** The alert indicates a breach of the Senior-Debt-to-EBITDA covenant\n3.  **How serious the risk is:** The metric trend is deteriorating at a rate of -15.75%, but the confidence level is low. This suggests some uncertainty in the trend analysis\n4.  **What the user should watch going forward:** Monitor the Senior-Debt-to-EBITDA metric and pay attention to any changes in the rate of change and confidence level\nFor alert:  {'metric': 'Senior-Debt-to-EBITDA', 'status': 'Breach', 'severity': 'critical', 'current_value': None, 'limit': None, 'trend': 'deteriorating', 'rate_of_change': np.float64(-15.75), 'trend_confidence': 'low', 'explanation': \"Here's an explanation of the covenant alert, based solely on the data provided:\n\n1.  **What is happening right now:** The Senior-Debt-to-EBITDA metric is in breach. No specific current value or covenant limit was provided.\n\n2.  **Why this matters:** The alert indicates a breach of the Senior-Debt-to-EBITDA covenant.\n\n3.  **How serious the risk is:** The metric trend is deteriorating at a rate of -15.75%, but the confidence level is low. This suggests some uncertainty in the trend analysis.\n\n4.  **What the user should watch going forward:** Monitor the Senior-Debt-to-EBITDA metric and pay attention to any changes in the rate of change and confidence level.\"}",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 3.05,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": false,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Healthcare Systems Co",
+            "type": "Corporate Bond",
+            "breaches": 0,
+            "near_breaches": 0,
+            "ideal": 1,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Safe",
+                    "severity": "ok",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -16.0,
+                    "trend_confidence": "low",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 1.05,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": true,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        }
+    ]
+}

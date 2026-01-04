@@ -1,0 +1,177 @@
+{
+    "summary": {
+        "total_investments": 5,
+        "total_breaches": 2,
+        "total_near_breaches": 0,
+        "total_ideal": 3
+    },
+    "investments": [
+        {
+            "id": 1,
+            "name": "TechCorp Industries",
+            "type": "Senior Secured Loan",
+            "breaches": 0,
+            "near_breaches": 0,
+            "ideal": 1,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Safe",
+                    "severity": "ok",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -1.66,
+                    "trend_confidence": "medium",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 1.78,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": true,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "RetailMart LLC",
+            "type": "Mezzanine Debt",
+            "breaches": 0,
+            "near_breaches": 0,
+            "ideal": 1,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Safe",
+                    "severity": "ok",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -15.79,
+                    "trend_confidence": "low",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 1.6,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": true,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Manufacturing Global",
+            "type": "Revolving Credit Facility",
+            "breaches": 1,
+            "near_breaches": 0,
+            "ideal": 0,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Breach",
+                    "severity": "critical",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "improving",
+                    "rate_of_change": 0.26,
+                    "trend_confidence": "high",
+                    "explanation": "generate_explanation(alert)",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 3.85,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": false,
+                        "near_breach": false,
+                        "breached": true,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Energy Solutions Inc",
+            "type": "Project Finance Loan",
+            "breaches": 1,
+            "near_breaches": 0,
+            "ideal": 0,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Breach",
+                    "severity": "critical",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -15.75,
+                    "trend_confidence": "low",
+                    "explanation": "generate_explanation(alert)",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 3.05,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": false,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Healthcare Systems Co",
+            "type": "Corporate Bond",
+            "breaches": 0,
+            "near_breaches": 0,
+            "ideal": 1,
+            "alerts": [
+                {
+                    "metric": "Senior-Debt-to-EBITDA",
+                    "status": "Safe",
+                    "severity": "ok",
+                    "current_value": null,
+                    "limit": null,
+                    "trend": "deteriorating",
+                    "rate_of_change": -16.0,
+                    "trend_confidence": "low",
+                    "rule_result": {
+                        "metric": "Senior-Debt-to-EBITDA",
+                        "value": 1.05,
+                        "ideal_value": 1.8,
+                        "near_breach_value": 3.3,
+                        "threshold_value": 3.5,
+                        "covenant_type": "maximum",
+                        "ideal_state": true,
+                        "near_breach": false,
+                        "breached": false,
+                        "severity": "high",
+                        "name": "Debt-to-EBITDA Ratio"
+                    }
+                }
+            ]
+        }
+    ]
+}
