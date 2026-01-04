@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
-from pathlib import Path
 
 # Load environment variables
 load_dotenv()
@@ -14,14 +13,10 @@ OPENROUTER_MODEL = os.getenv(
     "google/gemini-2.0-flash-exp:free"
 )
 
-# Initialize OpenRouter client
+# Initialize OpenRouter client with proper configuration
 client = OpenAI(
     base_url=OPENROUTER_URL,
     api_key=OPENROUTER_API_KEY,
-    default_headers={
-        "HTTP-Referer": "http://localhost",
-        "X-Title": "CBDA Hackathon App"
-    }
 )
 
 # Path to prompt file
@@ -33,8 +28,8 @@ def load_prompt_template() -> str:
     """
     Loads the explanation prompt template from file.
     """
-    print ("looking for promt at: ", PROMPT_PATH)
-    print("Exists: ", PROMPT_PATH.exists())
+    print("looking for prompt at:", PROMPT_PATH)
+    print("Exists:", PROMPT_PATH.exists())
     
     if not PROMPT_PATH.exists():
         raise FileNotFoundError(
@@ -49,6 +44,13 @@ def generate_explanation(alert: dict) -> str:
     """
     Generates a human-readable explanation for a covenant alert.
     """
+    
+    # Validate API key
+    if not OPENROUTER_API_KEY:
+        raise ValueError(
+            "OPENROUTER_API_KEY not found in environment variables. "
+            "Please check your .env file."
+        )
 
     prompt_template = load_prompt_template()
 
@@ -62,23 +64,37 @@ def generate_explanation(alert: dict) -> str:
         trend_confidence=alert["trend_confidence"],
     )
 
-    response = client.chat.completions.create(
-        model=OPENROUTER_MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a risk monitoring assistant. "
-                    "Your job is to clearly explain covenant alerts "
-                    "based only on structured data provided to you. "
-                    "Do not speculate or provide advice."
-                )
-            },
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=250,
-        temperature=0.5
-    )
 
-    return response.choices[0].message.content.strip()
+    try:
+        response = client.chat.completions.create(
+            model=OPENROUTER_MODEL,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a risk monitoring assistant. "
+                        "Your job is to clearly explain covenant alerts "
+                        "based only on structured data provided to you. "
+                        "Do not speculate or provide advice."
+                    )
+                },
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=1000,
+            temperature=0.5,
+            extra_headers={
+                "HTTP-Referer": "http://localhost",
+                "X-Title": "CBDA Hackathon App"
+            }
+        )
 
+        return response.choices[0].message.content.strip()
+    
+    except Exception as e:
+        print(f"Error calling OpenRouter API: {e}")
+        # Fallback to a basic explanation if API fails
+        return (
+            f"Alert: {alert['metric']} is currently {alert['current_value']}, "
+            f"which is {alert['status']} the limit of {alert['limit']}. "
+            f"Trend: {alert['trend']} ({alert['trend_confidence']} confidence)."
+        )

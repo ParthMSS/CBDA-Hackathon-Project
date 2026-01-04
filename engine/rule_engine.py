@@ -58,9 +58,11 @@ def evaluate_rule(rule, df: pd.DataFrame):
     return {
         "metric": metric,
         "value": latest_value,
+        "current_value": latest_value,
         "ideal_value": ideal,
         "near_breach_value": near_breach_val,
         "threshold_value": threshold,
+        "limit": threshold,
         "covenant_type": covenant_type,
         "ideal_state": ideal_state,
         "near_breach": near_breach,
