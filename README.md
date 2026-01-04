@@ -19,6 +19,7 @@ Think of it like a **smoke alarm** for covenant violations.
 ```
 covenant-breach-agent/
 │── app.py                     # Streamlit UI
+│── main.py                    # Runs the pipeline
 │── engine/
 │     ├── alert.py             # Converts result into structured alert
 │     ├── data_loader.py       # CSV ingestion

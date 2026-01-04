@@ -49,7 +49,7 @@ def check_breached_covenant(investments, rules):
             # Generate explanation ONLY for non-ok alerts
             if alert["severity"] != "ok":
                 time.sleep(1)  # lower risk of rate limiting
-                explanation = "generate_explanation(alert)"
+                explanation = generate_explanation(alert)
                 alert["explanation"] = explanation
 
             # Add full rule result context into alert
